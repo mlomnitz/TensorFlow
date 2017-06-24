@@ -9,7 +9,7 @@ import numpy as np
 from six.moves import cPickle as pickle
 from six.moves import range
 
-pickle_file = './notMNIST.pickle'
+pickle_file = '/Users/michaellomnitz/Documents/Jupyter/DeepLearning/TensorFlow/notMNIST_dataset/notMNIST.pickle'
 image_size = 28
 num_labels = 10
 
@@ -23,6 +23,29 @@ def reformat(dataset, labels):
     # Map 0 to [1.0, 0.0, 0.0 ...], 1 to [0.0, 1.0, 0.0 ...]
     labels = (np.arange(num_labels) == labels[:,None]).astype(np.float32)
     return dataset, labels
+
+def overlap( dataset_1, dataset_2):
+    entries_1, pixx_1,pixy_1 = dataset_1.shape
+    entries_2, pixx_2,pixy_2 = dataset_2.shape
+    my_dict = {}
+    a = {}
+    to_ret = []
+    for idx, x in enumerate(dataset_1):
+        #print (x)
+        my_dict.update({str(x):idx})
+    
+    print("Done loading first dataset")  
+    
+    for idy, y in enumerate(dataset_2):
+        if str(y) in my_dict:
+            a.update({my_dict[str(y)]:idy})
+        else:
+            to_ret.append(y)
+            
+    print(len(a),"shared dictionaries")
+    print(a)
+    return to_ret
+
 
 class data_set(object):
     
@@ -53,3 +76,4 @@ class data_set(object):
         print('Test set', self.test_dataset.shape, self.test_labels.shape)
         
         return 
+
