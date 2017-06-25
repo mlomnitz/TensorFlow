@@ -10,8 +10,9 @@ from six.moves import cPickle as pickle
 from six.moves import range
 
 pickle_file = '/Users/michaellomnitz/Documents/Jupyter/DeepLearning/TensorFlow/notMNIST_dataset/notMNIST.pickle'
-image_size = 28
 num_labels = 10
+image_size = 28
+
 
 def accuracy(predictions, labels):
     return (100.0 * np.sum(np.argmax(predictions, 1) == np.argmax(labels, 1))
@@ -19,10 +20,18 @@ def accuracy(predictions, labels):
 
  
 def reformat(dataset, labels):
-    dataset = dataset.reshape((-1, image_size * image_size)).astype(np.float32)
+    dataset = dataset.reshape(-1, image_size*image_size).astype(np.float32)
     # Map 0 to [1.0, 0.0, 0.0 ...], 1 to [0.0, 1.0, 0.0 ...]
     labels = (np.arange(num_labels) == labels[:,None]).astype(np.float32)
     return dataset, labels
+
+def reformat_cvn(dataset, labels):
+    dataset = dataset.reshape(
+        (-1, image_size, image_size, 1)).astype(np.float32) #greyscale
+    labels = (np.arange(num_labels) == labels[:,None]).astype(np.float32)
+    return dataset, labels
+
+
 
 def overlap( dataset_1, dataset_2):
     entries_1, pixx_1,pixy_1 = dataset_1.shape
@@ -49,7 +58,7 @@ def overlap( dataset_1, dataset_2):
 
 class data_set(object):
     
-    def __init__(self, n_samples = 0):
+    def __init__(self, n_samples = 0, is_cvn = False):
 
         with open(pickle_file, 'rb') as f:
             save = pickle.load(f)
@@ -63,9 +72,15 @@ class data_set(object):
             print('Training set', train_dataset.shape, train_labels.shape)
             print('Validation set', valid_dataset.shape, valid_labels.shape)
             print('Test set', test_dataset.shape, test_labels.shape)
-        self.train_dataset, self.train_labels = reformat(train_dataset, train_labels)
-        self.valid_dataset, self.valid_labels = reformat(valid_dataset, valid_labels)
-        self.test_dataset, self.test_labels = reformat(test_dataset, test_labels)
+        #Reshape for use in model
+        if is_cvn == False:
+            self.train_dataset, self.train_labels = reformat(train_dataset, train_labels)
+            self.valid_dataset, self.valid_labels = reformat(valid_dataset, valid_labels)
+            self.test_dataset, self.test_labels = reformat(test_dataset, test_labels)
+        else:
+            self.train_dataset, self.train_labels = reformat_cvn(train_dataset, train_labels)
+            self.valid_dataset, self.valid_labels = reformat_cvn(valid_dataset, valid_labels)
+            self.test_dataset, self.test_labels = reformat_cvn(test_dataset, test_labels)
 
         if n_samples != 0:
             self.train_dataset = self.train_dataset[:n_samples , : ]
