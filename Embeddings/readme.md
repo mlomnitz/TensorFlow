@@ -12,6 +12,6 @@ This directory contains the follwing files:
 
 The following illustrate the performance of the two models:
 1. Skipgram:
-![skipgram_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings.pdf)
+![skipgram_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings.pdf = 150x150)
 2. CBOW:
-![CBOW_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings_CBOW.pdf)
+![CBOW_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings_CBOW.pdf  = 150x150)
