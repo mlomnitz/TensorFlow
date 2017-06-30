@@ -1,4 +1,4 @@
-# Worde embeddings
+# Word embeddings
 This directory contains the implementation determining a words "meaning" from the contextial information (word embeddings). Two models are included to generate a 
 supervised learning algorithm from a corpus:
 1. Skipgram: Trains the model to learn to predict the context given the appearance of a words.
@@ -12,6 +12,6 @@ This directory contains the follwing files:
 
 The following illustrate the performance of the two models:
 1. Skipgram:
-![skipgram_model][./Embeddings.pdf]
+![skipgram_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings.pdf)
 2. CBOW:
-![CBOW_model][./Embeddings_CBOW.pdf]
+![CBOW_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings_CBOW.pdf)
