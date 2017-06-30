@@ -11,7 +11,8 @@ This directory contains the follwing files:
 * _run_Word2Vec.py_ : Script that utilizes theprevious two modules to load the data, feed it to embeddings models and do the training. A random validation set is generated from the data used to test performance. Performance is visualized using t-SNE implementation from SKlearn.
 
 The following illustrate the performance of the two models:
+
 1. Skipgram:
-![skipgram_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings.pdf = 150x150)
+![skipgram_model](./Embeddings.pdf)
 2. CBOW:
-![CBOW_model](https://github.com/mlomnitz/TensorFlow/blob/master/Embeddings/Embeddings_CBOW.pdf  = 150x150)
+![CBOW_model](./Embeddings_CBOW.pdf)
